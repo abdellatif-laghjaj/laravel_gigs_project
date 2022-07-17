@@ -18,20 +18,3 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get("/about", function (){
-    return response("<h1>About Us</h1>");
-});
-
-Route::get("/posts", function (){
-    return "<h1>Posts</h1>";
-});
-
-Route::get("/posts/{id}", function ($id){
-    return "Post #".$id;
-})->where("id", "[0-9]*");
-
-Route::get("/search", function (Request $request){
-    if($request->name === null) return "Error";
-    return $request->name;
-});
-
