@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,4 +30,8 @@ Route::get("/posts/{id}", function ($id){
     return "Post #".$id;
 })->where("id", "[0-9]*");
 
+Route::get("/search", function (Request $request){
+    if($request->name === null) return "Error";
+    return $request->name;
+});
 
