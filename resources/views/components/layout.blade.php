@@ -47,7 +47,7 @@
 {{-- Main content --}}
 <main>
     {{-- VIEW OUTPUT --}}
-    @yield('content')
+    {{$slot}}
 </main>
 
 <footer
