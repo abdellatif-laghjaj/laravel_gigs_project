@@ -21,13 +21,13 @@
             },
         };
     </script>
-    <title>LaraGigs | Find Laravel Jobs & Projects</title>
+    <title>Listinger | Find Laravel Jobs & Projects</title>
 </head>
 
 <body class="mb-48">
 <nav class="flex justify-between items-center mb-4">
-    <a href="index.html">
-        <img class="w-24 logo" src="images/logo.png" alt=""/>
+    <a href="/">
+        <img class="w-24 logo" src="{{asset("images/logo.png")}}" alt=""/>
     </a>
     <ul class="flex space-x-6 mr-6 text-lg">
         <li>
