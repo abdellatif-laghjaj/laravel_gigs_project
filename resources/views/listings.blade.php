@@ -10,7 +10,7 @@
         <h1>
             <a href="/listing/{{$listing['id']}}">{{$listing['title']}}</a>
         </h1>
-        <p>{{$listing['author']}}</p>
+        <p>{{$listing['description']}}</p>
     @endforeach
 @else
     <p>No listings found</p>
