@@ -14,11 +14,19 @@
                 <input type="text" class="border border-gray-200 rounded p-2 w-full" name="company"/>
             </div>
 
+            @error("company")
+            <p class="text-red-500 text-md">Company is required*</p>
+            @enderror
+
             <div class="mb-6">
                 <label for="title" class="inline-block text-lg mb-2">Job Title</label>
                 <input type="text" class="border border-gray-200 rounded p-2 w-full" name="title"
                        placeholder="Example: Senior Laravel Developer"/>
             </div>
+
+            @error("title")
+            <p class="text-red-500 text-md">Title is required*</p>
+            @enderror
 
             <div class="mb-6">
                 <label for="location" class="inline-block text-lg mb-2">Job Location</label>
@@ -26,10 +34,18 @@
                        placeholder="Example: Remote, Boston MA, etc"/>
             </div>
 
+            @error("location")
+            <p class="text-red-500 text-md">Location is required*</p>
+            @enderror
+
             <div class="mb-6">
                 <label for="email" class="inline-block text-lg mb-2">Contact Email</label>
                 <input type="text" class="border border-gray-200 rounded p-2 w-full" name="email"/>
             </div>
+
+            @error("email")
+            <p class="text-red-500 text-md">Email is required*</p>
+            @enderror
 
             <div class="mb-6">
                 <label for="website" class="inline-block text-lg mb-2">
@@ -37,6 +53,10 @@
                 </label>
                 <input type="text" class="border border-gray-200 rounded p-2 w-full" name="website"/>
             </div>
+
+            @error("website")
+            <p class="text-red-500 text-md">Website is required*</p>
+            @enderror
 
             <div class="mb-6">
                 <label for="tags" class="inline-block text-lg mb-2">
@@ -46,12 +66,20 @@
                        placeholder="Example: Laravel, Backend, Postgres, etc"/>
             </div>
 
+            @error("tags")
+            <p class="text-red-500 text-md">Tags are required*</p>
+            @enderror
+
             <div class="mb-6">
                 <label for="logo" class="inline-block text-lg mb-2">
                     Company Logo
                 </label>
                 <input type="file" class="border border-gray-200 rounded p-2 w-full" name="logo"/>
             </div>
+
+            @error("logo")
+            <p class="text-red-500 text-md">Iamge is required*</p>
+            @enderror
 
             <div class="mb-6">
                 <label for="description" class="inline-block text-lg mb-2">
@@ -60,6 +88,10 @@
                 <textarea class="border border-gray-200 rounded p-2 w-full" name="description" rows="10"
                           placeholder="Include tasks, requirements, salary, etc"></textarea>
             </div>
+
+            @error("description")
+            <p class="text-red-500 text-md">Description is required*</p>
+            @enderror
 
             <div class="mb-6">
                 <button class="bg-laravel text-white rounded py-2 px-4 hover:bg-black">
