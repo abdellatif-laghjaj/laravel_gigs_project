@@ -14,10 +14,18 @@ use App\Models\Listing;
 |
 */
 
+//All listings
 Route::get('/', function () {
     return view("listings", [
         "heading" => "Latest Gigs",
         "listings" => Listing::all()
+    ]);
+});
+
+//Single listing
+Route::get("/listing/{id}", function ($id){
+    return view('listing', [
+        'listing' => Listing::find($id),
     ]);
 });
 
