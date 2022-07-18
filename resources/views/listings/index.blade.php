@@ -8,7 +8,7 @@
                 <x-listing-card :listing="$listing"/>
             @endforeach
         @else
-            <p>No listings found</p>
+            <p class="text-center">No listings found</p>
         @endunless
     </div>
 </x-layout>
