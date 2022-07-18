@@ -35,14 +35,18 @@ class ListingController extends Controller
     {
         $formFields = $request->validate([
             'title' => ['required', 'max:50'],
-            'company' => ['required', Rule::unique('Listings', 'company')],
-            'email' => ['required', 'email', Rule::unique('Listings', 'email')],
+            'company' => ['required', Rule::unique('listings', 'company')],
+            'email' => ['required', 'email', Rule::unique('listings', 'email')],
+            'location' => ['required', 'max:50'],
             'website' => ['required', 'url'],
             'description' => ['required', 'max:500'],
             'tags' => ['required', 'max:255'],
-            'logo' => ['required', 'image'],
+            //'logo' => ['required', 'image'],
         ]);
 
-        redirect('/');
+        Listing::create($formFields);
+
+        //redirect to homepage
+        return redirect("/");
     }
 }
