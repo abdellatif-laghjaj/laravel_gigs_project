@@ -8,5 +8,5 @@ php:
 js:
   finder:
     not-name:
-      - vite.config.js
+      - webpack.mix.js
 css: true
