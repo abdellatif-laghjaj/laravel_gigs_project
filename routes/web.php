@@ -38,5 +38,8 @@ Route::delete('/listings/{listing}', [ListingController::class, 'destroy']);
 //show register form
 Route::get('/register', [UserController::class, 'create']);
 
+//show login form
+Route::get('/login', [UserController::class, 'login']);
+
 //Single listing
 Route::get("/listing/{listing}", [ListingController::class, 'show']);
