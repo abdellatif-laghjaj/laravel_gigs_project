@@ -9,32 +9,36 @@ use Illuminate\Validation\Rule;
 class UserController extends Controller
 {
     // Show Register/Create Form
-    public function create() {
+    public function create()
+    {
         return view('users.register');
     }
 
     // Create New User
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $formFields = $request->validate([
-            'name' => ['required', 'min:3'],
-            'email' => ['required', 'email', Rule::unique('users', 'email')],
-            'password' => 'required|confirmed|min:6'
+            'name' => ['required', 'min:6'],
+            'email' => ['email', 'required', Rule::unique('users', 'email')],
+            'password' => ['required', 'confirmed', 'min:8']
         ]);
 
-        // Hash Password
+        //hash the password
         $formFields['password'] = bcrypt($formFields['password']);
 
-        // Create User
+        //create user
         $user = User::create($formFields);
 
-        // Login
+        //login
         auth()->login($user);
 
-        return redirect('/')->with('message', 'User created and logged in');
+        //redirect to homepage
+        return redirect('/')->with("message", 'User created and loged in');
     }
 
     // Logout User
-    public function logout(Request $request) {
+    public function logout(Request $request)
+    {
         auth()->logout();
 
         $request->session()->invalidate();
@@ -45,18 +49,20 @@ class UserController extends Controller
     }
 
     // Show Login Form
-    public function login() {
+    public function login()
+    {
         return view('users.login');
     }
 
     // Authenticate User
-    public function authenticate(Request $request) {
+    public function authenticate(Request $request)
+    {
         $formFields = $request->validate([
             'email' => ['required', 'email'],
             'password' => 'required'
         ]);
 
-        if(auth()->attempt($formFields)) {
+        if (auth()->attempt($formFields)) {
             $request->session()->regenerate();
 
             return redirect('/')->with('message', 'You are now logged in!');

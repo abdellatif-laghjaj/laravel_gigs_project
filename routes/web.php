@@ -24,7 +24,7 @@ use App\Models\Listing;
 // store - Store new listing
 // edit - Show form to edit listing
 // update - Update listing
-// destroy - Delete listing  
+// destroy - Delete listing
 
 // All Listings
 Route::get('/', [ListingController::class, 'index']);
