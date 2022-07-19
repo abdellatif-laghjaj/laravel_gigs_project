@@ -53,25 +53,28 @@ class ListingController extends Controller
         return redirect("/")->with("message", "Listing created successfully");
     }
 
-    //show edit form
+    // Show Edit Form
     public function edit(Listing $listing)
     {
-        return view('listings.edit', [
-            'listing' => $listing
-        ]);
+        return view('listings.edit', ['listing' => $listing]);
     }
 
-    //update listing
+    // Update Listing Data
     public function update(Request $request, Listing $listing)
     {
+        // Make sure logged in user is owner
+        if ($listing->user_id != auth()->id()) {
+            abort(403, 'Unauthorized Action');
+        }
+
         $formFields = $request->validate([
-            'title' => ['required', 'max:50'],
-            'company' => 'required',
-            'email' => ['required', 'email', Rule::unique('listings', 'email')],
-            'location' => ['required', 'max:50'],
-            'website' => ['required', 'url'],
-            'description' => ['required', 'max:500'],
-            'tags' => ['required', 'max:255'],
+            'title' => 'required',
+            'company' => ['required'],
+            'location' => 'required',
+            'website' => 'required',
+            'email' => ['required', 'email'],
+            'tags' => 'required',
+            'description' => 'required'
         ]);
 
         if ($request->hasFile('logo')) {
@@ -80,8 +83,6 @@ class ListingController extends Controller
 
         $listing->update($formFields);
 
-
-        //redirect to homepage
-        return redirect("/")->with("message", "Listing updated successfully");
+        return back()->with('message', 'Listing updated successfully!');
     }
 }

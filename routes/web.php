@@ -29,7 +29,7 @@ Route::post("/listings", [ListingController::class, "store"]);
 Route::get("/listings/{listing}/edit", [ListingController::class, "edit"]);
 
 //update listing
-Route::patch("/listings/{listing}", [ListingController::class, 'update']);
+Route::put('/listings/{listing}', [ListingController::class, 'update']);
 
 //Single listing
 Route::get("/listing/{listing}", [ListingController::class, 'show']);
