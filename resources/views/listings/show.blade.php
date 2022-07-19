@@ -42,12 +42,17 @@
             </div>
         </x-card>
         <x-card class="mt-4 flex space-x-6">
-            <a href="/listings/{{$listing->id}}/edit">
-                <i class="fa-solid fa-pen"></i>
+            <a href="/listings/{{$listing->id}}/edit" class="text-green-500">
+                <i class="fa-solid fa-pen"></i> Edit
             </a>
-            <a href="/listings/{{$listing->id}}/delete">
-                <i class="fa-solid fa-trash-can"></i>
-            </a>
+
+            <form method="POST" action="/listings/{{$listing->id}}">
+                @csrf
+                @method('HEAD')
+                <button class="text-red-500" type="submit">
+                    <i class="fa-solid fa-trash-can"></i> Delete
+                </button>
+            </form>
         </x-card>
     </div>
 

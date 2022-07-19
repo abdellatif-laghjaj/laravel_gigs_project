@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Listing;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
 class ListingController extends Controller
@@ -84,5 +85,13 @@ class ListingController extends Controller
         $listing->update($formFields);
 
         return back()->with('message', 'Listing updated successfully!');
+    }
+
+    //delete listing
+    public function destroy(Listing $listing)
+    {
+        //delete listing
+        $listing->delete();
+        return redirect("/")->with("message", "Listing deleted successfully");
     }
 }
