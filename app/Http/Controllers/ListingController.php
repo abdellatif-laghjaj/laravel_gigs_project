@@ -4,70 +4,64 @@ namespace App\Http\Controllers;
 
 use App\Models\Listing;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
 class ListingController extends Controller
 {
-    //show all listings
-    public function index()
-    {
-        return view("listings.index", [
-            "listings" => Listing::latest()->filter(request(['tag', 'search']))->paginate(6),
+    // Show all listings
+    public function index() {
+        return view('listings.index', [
+            'listings' => Listing::latest()->filter(request(['tag', 'search']))->paginate(6)
         ]);
     }
 
-    //show single listing
-    public function show(Listing $listing)
-    {
-        return view("listings.show", [
-            "listing" => $listing,
+    //Show single listing
+    public function show(Listing $listing) {
+        return view('listings.show', [
+            'listing' => $listing
         ]);
     }
 
-    //create a listning
-    public function create()
-    {
-        return view("listings.create");
+    // Show Create Form
+    public function create() {
+        return view('listings.create');
     }
 
-    //store a listing
-    public function store(Request $request)
-    {
+    // Store Listing Data
+    public function store(Request $request) {
         $formFields = $request->validate([
-            'title' => ['required', 'max:50'],
+            'title' => 'required',
             'company' => ['required', Rule::unique('listings', 'company')],
-            'email' => ['required', 'email', Rule::unique('listings', 'email')],
-            'location' => ['required', 'max:50'],
-            'website' => ['required', 'url'],
-            'description' => ['required', 'max:500'],
-            'tags' => ['required', 'max:255'],
+            'location' => 'required',
+            'website' => 'required',
+            'email' => ['required', 'email'],
+            'tags' => 'required',
+            'description' => 'required'
         ]);
 
-        if ($request->hasFile('logo')) {
+        if($request->hasFile('logo')) {
             $formFields['logo'] = $request->file('logo')->store('logos', 'public');
         }
 
+        $formFields['user_id'] = auth()->id();
+
         Listing::create($formFields);
 
-        //redirect to homepage
-        return redirect("/")->with("message", "Listing created successfully");
+        return redirect('/')->with('message', 'Listing created successfully!');
     }
 
     // Show Edit Form
-    public function edit(Listing $listing)
-    {
+    public function edit(Listing $listing) {
         return view('listings.edit', ['listing' => $listing]);
     }
 
     // Update Listing Data
-    public function update(Request $request, Listing $listing)
-    {
+    public function update(Request $request, Listing $listing) {
         // Make sure logged in user is owner
-        if ($listing->user_id != auth()->id()) {
+        if($listing->user_id != auth()->id()) {
             abort(403, 'Unauthorized Action');
         }
-
+        
         $formFields = $request->validate([
             'title' => 'required',
             'company' => ['required'],
@@ -78,7 +72,7 @@ class ListingController extends Controller
             'description' => 'required'
         ]);
 
-        if ($request->hasFile('logo')) {
+        if($request->hasFile('logo')) {
             $formFields['logo'] = $request->file('logo')->store('logos', 'public');
         }
 
@@ -87,11 +81,19 @@ class ListingController extends Controller
         return back()->with('message', 'Listing updated successfully!');
     }
 
-    //delete listing
-    public function destroy(Listing $listing)
-    {
-        //delete listing
+    // Delete Listing
+    public function destroy(Listing $listing) {
+        // Make sure logged in user is owner
+        if($listing->user_id != auth()->id()) {
+            abort(403, 'Unauthorized Action');
+        }
+        
         $listing->delete();
-        return redirect("/")->with("message", "Listing deleted successfully");
+        return redirect('/')->with('message', 'Listing deleted successfully');
+    }
+
+    // Manage Listings
+    public function manage() {
+        return view('listings.manage', ['listings' => auth()->user()->listings()->get()]);
     }
 }
