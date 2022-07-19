@@ -32,14 +32,13 @@
     </a>
     <ul class="flex space-x-6 mr-6 text-lg">
         <li class="bg-gray-300 py-3 px-5 rounded-lg">
-            <a href="" class="hover:text-laravel">
+            <a href="/register" class="hover:text-laravel">
                 <i class="fa-solid fa-user-plus"></i> Register
             </a>
         </li>
         <li class="bg-gray-300 py-3 px-5 rounded-lg">
-            <a href="" class="hover:text-laravel">
-                <i class="fa-solid fa-arrow-right-to-bracket"></i>
-                Login
+            <a href="/login" class="hover:text-laravel">
+                <i class="fa-solid fa-arrow-right-to-bracket"></i> Login
             </a>
         </li>
     </ul>
