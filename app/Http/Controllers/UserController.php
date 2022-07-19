@@ -55,16 +55,16 @@ class UserController extends Controller
     public function authenticate(Request $request)
     {
         $formFields = $request->validate([
-            'email' => ['required', 'email'],
+            'email' => ['email', 'required'],
             'password' => 'required'
         ]);
 
         if (auth()->attempt($formFields)) {
             $request->session()->regenerate();
-
-            return redirect('/')->with('message', 'You are now logged in!');
+            return redirect("/")->with("message", "You're you logged in");
         }
-
-        return back()->withErrors(['email' => 'Invalid Credentials'])->onlyInput('email');
+        return back()->withErrors([
+            'email' => 'The credentials you entered did not match our records. Please try again.'
+        ])->onlyInput();
     }
 }
