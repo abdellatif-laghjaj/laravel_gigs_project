@@ -41,5 +41,14 @@
                 </div>
             </div>
         </x-card>
+        <x-card class="mt-4 flex space-x-6">
+            <a href="/listings/{{$listing->id}}/edit">
+                <i class="fa-solid fa-pen"></i>
+            </a>
+            <a href="/listings/{{$listing->id}}/delete">
+                <i class="fa-solid fa-trash-can"></i>
+            </a>
+        </x-card>
     </div>
+
 </x-layout>
