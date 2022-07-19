@@ -66,7 +66,7 @@ class ListingController extends Controller
     {
         // Make sure logged in user is owner
         if ($listing->user_id != auth()->id()) {
-            abort(403, 'Unauthorized Action');
+            abort(403, "Unauthorized Action");
         }
 
         $formFields = $request->validate([
@@ -103,6 +103,8 @@ class ListingController extends Controller
     // Manage Listings
     public function manage()
     {
-        return view('listings.manage', ['listings' => auth()->user()->listings()->get()]);
+        return view("listings.manage", [
+            'listings' => auth()->user()->listings()->get()
+        ]);
     }
 }
